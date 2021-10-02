@@ -18,8 +18,11 @@ body {
   width: 90%;
   min-height: 100vh;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
 }
 
 // Left section styles
@@ -27,9 +30,14 @@ body {
 // navbar
 
 main {
-  width: 75%;
+  //width: 75%;
 }
-nav {
+aside {
+  background-color: $searchbar;
+  //width: 23%;
+}
+
+form {
   height: 74px;
 
   display: flex;
@@ -64,15 +72,16 @@ main {
   #cards {
     background-color: $cardsbg;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    //grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     /*
     The flexway
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    */
     justify-items: center;
+    */
     padding: 32px;
     .card {
       /*
@@ -94,9 +103,9 @@ main {
         position: relative;
         img {
           display: block;
+          object-fit: cover;
           width: 100%;
-          height: auto;
-          overflow: hidden;
+          height: 230px;
         }
         .curve {
           display: block;
@@ -145,8 +154,3 @@ main {
 }
 
 // Right section styles
-
-aside {
-  background-color: $searchbar;
-  width: 23%;
-}

@@ -16,6 +16,7 @@
     "posthtml-include": "^1.7.1"
   },
   "dependencies": {
-    "@parcel/babel-preset-env": "^2.0.0-alpha.3"
+    "@parcel/babel-preset-env": "^2.0.0-alpha.3",
+    "axios": "^0.22.0"
   }
 }
