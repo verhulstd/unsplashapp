@@ -1,0 +1,152 @@
+@use "./base/mixins" as *;
+@use "./base/variables" as *;
+@use "./base/reset";
+@use "./base/fonts";
+@use "../icons/style.css";
+
+// Base styles
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0 auto;
+}
+
+#container {
+  width: 90%;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+// Left section styles
+
+// navbar
+
+main {
+  width: 75%;
+}
+nav {
+  height: 74px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
+  #wrapperforicon {
+    position: relative;
+    #searchbar {
+      width: 575px;
+      height: 40px;
+      background-color: $searchbar;
+      border-radius: 22px;
+      border: none !important;
+      outline: none;
+      padding-left: 40px;
+    }
+    .icon-search {
+      position: absolute;
+      top: 12px;
+      left: 17px;
+      font-size: 1.5rem;
+      // margin: 12px 0 0 17px;
+      color: $icongrey;
+    }
+  }
+}
+
+// cards
+
+main {
+  #cards {
+    background-color: $cardsbg;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    /*
+    The flexway
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    */
+    justify-items: center;
+    padding: 32px;
+    .card {
+      /*
+      width: 30%;
+      */
+      transition: 200ms;
+      &:hover {
+        box-shadow: 5px 10px 22px -3px rgba(0, 0, 0, 0.27);
+        transform: translateY(-4px);
+      }
+      // min-width: 300px;
+      // height: 370px;
+      background-color: $white;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+      .photo {
+        // height: 228px;
+        position: relative;
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+          overflow: hidden;
+        }
+        .curve {
+          display: block;
+          position: absolute;
+          bottom: -12px;
+          left: -6px;
+          width: 70px;
+          height: auto;
+        }
+        .profile {
+          position: absolute;
+          bottom: -13px;
+          left: 17px;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: orange;
+        }
+      }
+      .text {
+        height: 97px;
+        border-bottom: 2px solid $searchbar;
+        padding: 30px 18px 0 18px;
+        line-height: 1.9rem;
+        font-size: 1.3rem;
+        font-family: "open sans";
+      }
+      .likes {
+        padding: 8px 8px 8px 8px;
+        .starwrapper {
+          background-color: $searchbar;
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          svg {
+            color: $icongrey;
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Right section styles
+
+aside {
+  background-color: $searchbar;
+  width: 23%;
+}
