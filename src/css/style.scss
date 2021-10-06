@@ -45,6 +45,14 @@ form {
   align-items: center;
   background-color: $white;
   #wrapperforicon {
+    &.loading {
+      input {
+        cursor: not-allowed;
+      }
+      .icon-loader {
+        display: block;
+      }
+    }
     position: relative;
     #searchbar {
       width: 575px;
@@ -60,12 +68,30 @@ form {
       top: 12px;
       left: 17px;
       font-size: 1.5rem;
-      // margin: 12px 0 0 17px;
+      pointer-events: none;
       color: $icongrey;
+    }
+    .icon-loader {
+      display: none;
+      pointer-events: none;
+      position: absolute;
+      top: 12px;
+      right: 17px;
+      font-size: 1.5rem;
+      // margin: 12px 0 0 17px;
+      color: red;
+      animation: rotate 0.5s infinite linear;
     }
   }
 }
-
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
 // cards
 
 main {
