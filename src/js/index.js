@@ -8,13 +8,16 @@ import { httpClient, preloadImage, preloadImages } from "./helpers";
 
 const searchField = document.getElementById("searchbar");
 const form = document.querySelector("form");
-const cardTemplate = document.querySelector("template").innerHTML;
+const cardTemplate = [...document.querySelectorAll("template")][0].innerHTML;
+const likeTemplate = [...document.querySelectorAll("template")][1].innerHTML;
 const grid = document.getElementById("cards");
+const likeZone = document.querySelector(".likes");
 const inputZone = document.querySelector("#wrapperforicon");
+const likedPictures = [];
+
 /**
  * EVENTS
  */
-
 form.onsubmit = async function (e) {
   e.preventDefault();
   const { value } = searchField;
@@ -33,15 +36,31 @@ form.onsubmit = async function (e) {
     grid.innerHTML = response.data.results
       .map((unsplashObj) =>
         cardTemplate
-          .replace("#CARD_IMAGE_URL", unsplashObj.urls.thumb)
+          .replaceAll("#CARD_IMAGE_URL", unsplashObj.urls.thumb)
           .replace("#CARD_PROFILE", "")
+          .replace("#ID", unsplashObj.id)
           .replaceAll("#CARD_TEXT", unsplashObj.alt_description)
       )
       .join("");
   }
-
   // hoeveel fotos zijn er?
   // fetch results in grid plaatsen
 };
 
-//alt_description
+grid.onclick = (e) => {
+  if (e.target.classList.contains("starwrapper")) {
+    ///die bewust card zijn id en thumbfoto opvragen
+    setLike(e.target.dataset.id, e.target.dataset.thumb);
+    e.target.classList.add("active");
+  }
+};
+
+function setLike(id, thumb) {
+  likedPictures.push({
+    id,
+    thumb,
+  });
+  // //
+  // XXX.innerHTML = XXX.map()
+  // map alle likes en plaats x aantal liketemplates in de likeZone
+}

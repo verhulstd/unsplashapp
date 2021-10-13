@@ -31,7 +31,7 @@
       <main>
         <section id="cards"></section>
       </main>
-      <aside></aside>
+      <aside class="likes"></aside>
     </div>
 
     <template>
@@ -43,6 +43,18 @@
         </div>
         <div class="text">#CARD_TEXT</div>
         <div class="likes">
+          <div class="starwrapper" data-id="#ID" data-thumb="#CARD_IMAGE_URL">
+            <svg class="icon icon-star-full">
+              <use href="#icon-star-full"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template>
+      <div class="likes__card">
+        <div class="likes__card__image">
+          <img src="#CARD_IMAGE_URL" alt="" />
           <div class="starwrapper">
             <svg class="icon icon-star-full">
               <use href="#icon-star-full"></use>
@@ -51,7 +63,6 @@
         </div>
       </div>
     </template>
-
     <script type="module" src="./js/index.js"></script>
   </body>
 </html>

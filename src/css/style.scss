@@ -185,6 +185,10 @@ main {
           svg {
             color: $icongrey;
             font-size: 1.2rem;
+            pointer-events: none;
+            use {
+              pointer-events: none;
+            }
           }
         }
       }
@@ -193,3 +197,35 @@ main {
 }
 
 // Right section styles
+.likes {
+  padding: 10px;
+  @include make-col(2, 10px);
+  align-content: flex-start;
+  &__card {
+    &__image {
+      position: relative;
+      aspect-ratio: 1/1;
+      img {
+        @extend %responsive;
+        height: 100%;
+        object-fit: cover;
+      }
+      .starwrapper {
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+        background-color: rgba($searchbar, 0.6);
+        padding: 5px;
+        border-radius: 100%;
+        border: 1px solid rgba($searchbar, 0.6);
+        transition: all 300ms;
+        cursor: pointer;
+        &:hover {
+          border-color: orange;
+          transform: scale(1.2);
+          background-color: rgba($searchbar, 0.9);
+        }
+      }
+    }
+  }
+}
