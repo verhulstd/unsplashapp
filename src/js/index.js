@@ -1,6 +1,11 @@
 import "../css/style.scss";
 
-import { httpClient, preloadImage, preloadImages } from "./helpers";
+import {
+  httpClient,
+  preloadImage,
+  preloadImages,
+  saveToLocalStorage,
+} from "./helpers";
 
 /**
  * VARS
@@ -13,8 +18,10 @@ const likeTemplate = [...document.querySelectorAll("template")][1].innerHTML;
 const grid = document.getElementById("cards");
 const likeZone = document.querySelector(".likes");
 const inputZone = document.querySelector("#wrapperforicon");
-const likedPictures = [];
-
+const likedPictures = window.localStorage.getItem("unsplashapp-likes")
+  ? JSON.parse(window.localStorage.getItem("unsplashapp-likes"))
+  : [];
+if (likedPictures.length) renderLikes();
 /**
  * EVENTS
  */
@@ -43,8 +50,6 @@ form.onsubmit = async function (e) {
       )
       .join("");
   }
-  // hoeveel fotos zijn er?
-  // fetch results in grid plaatsen
 };
 
 grid.onclick = (e) => {
@@ -55,12 +60,28 @@ grid.onclick = (e) => {
   }
 };
 
+likeZone.onclick = (e) => {
+  if (e.target.classList.contains("starwrapper")) {
+    const id = e.target.dataset.id;
+    const foundIndex = likedPictures.findIndex((likeObj) => likeObj.id === id);
+    likedPictures.splice(foundIndex, 1);
+    saveToLocalStorage("unsplashapp-likes", likedPictures);
+    renderLikes();
+  }
+};
+
 function setLike(id, thumb) {
   likedPictures.push({
     id,
     thumb,
   });
+  saveToLocalStorage("unsplashapp-likes", likedPictures);
+  renderLikes();
+}
+function renderLikes() {
   likeZone.innerHTML = likedPictures
-    .map((el) => likeTemplate.replace("#CARD_IMAGE_URL", el.thumb))
+    .map((el) =>
+      likeTemplate.replace("#ID", el.id).replace("#CARD_IMAGE_URL", el.thumb)
+    )
     .join("");
 }

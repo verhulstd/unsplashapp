@@ -18,3 +18,6 @@ export const preloadImage = (url) =>
   });
 
 export const preloadImages = (arr) => Promise.all(arr.map(preloadImage));
+
+export const saveToLocalStorage = (name, obj) =>
+  window.localStorage.setItem(name, JSON.stringify(obj));

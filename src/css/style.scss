@@ -220,6 +220,10 @@ main {
         border: 1px solid rgba($searchbar, 0.6);
         transition: all 300ms;
         cursor: pointer;
+        svg,
+        use {
+          pointer-events: none;
+        }
         &:hover {
           border-color: orange;
           transform: scale(1.2);
