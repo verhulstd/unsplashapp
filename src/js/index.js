@@ -49,6 +49,11 @@ form.onsubmit = async function (e) {
           .replaceAll("#CARD_TEXT", unsplashObj.alt_description)
       )
       .join("");
+    grid.querySelectorAll(".starwrapper").forEach((sw) => {
+      if (likedPictures.map((el) => el.id).includes(sw.dataset.id)) {
+        sw.classList.add("active");
+      }
+    });
   }
 };
 
@@ -67,6 +72,13 @@ likeZone.onclick = (e) => {
     likedPictures.splice(foundIndex, 1);
     saveToLocalStorage("unsplashapp-likes", likedPictures);
     renderLikes();
+    //weghalen van .active
+    // grid.querySelectorAll(".active").forEach((el) => {
+    //   if (el.dataset.id === id) {
+    //     el.classList.remove("active");
+    //   }
+    // });
+    document.querySelector(`[data-id=${id}]`).classList.remove("active");
   }
 };
 
@@ -76,6 +88,7 @@ function setLike(id, thumb) {
     thumb,
   });
   saveToLocalStorage("unsplashapp-likes", likedPictures);
+
   renderLikes();
 }
 function renderLikes() {
