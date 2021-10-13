@@ -60,7 +60,7 @@ function setLike(id, thumb) {
     id,
     thumb,
   });
-  // //
-  // XXX.innerHTML = XXX.map()
-  // map alle likes en plaats x aantal liketemplates in de likeZone
+  likeZone.innerHTML = likedPictures
+    .map((el) => likeTemplate.replace("#CARD_IMAGE_URL", el.thumb))
+    .join("");
 }
