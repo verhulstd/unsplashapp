@@ -58,27 +58,28 @@ form.onsubmit = async function (e) {
 };
 
 grid.onclick = (e) => {
+  // 1) check if correct item was clicked
   if (e.target.classList.contains("starwrapper")) {
-    ///die bewust card zijn id en thumbfoto opvragen
-    setLike(e.target.dataset.id, e.target.dataset.thumb);
-    e.target.classList.add("active");
+    //2) are we active yet
+    if (e.target.classList.contains("active")) {
+      //3) if yes => make inactive
+      /// click on likedzone specific item data-id
+      const id = e.target.dataset.id;
+      likeZone.querySelector(`.starwrapper[data-id="${id}"]`).click();
+    } else {
+      //4) if no => make active
+      setLike(e.target.dataset.id, e.target.dataset.thumb);
+      e.target.classList.add("active");
+    }
   }
 };
 
 likeZone.onclick = (e) => {
   if (e.target.classList.contains("starwrapper")) {
     const id = e.target.dataset.id;
-    const foundIndex = likedPictures.findIndex((likeObj) => likeObj.id === id);
-    likedPictures.splice(foundIndex, 1);
+    setUnLike(id);
     saveToLocalStorage("unsplashapp-likes", likedPictures);
     renderLikes();
-    //weghalen van .active
-    // grid.querySelectorAll(".active").forEach((el) => {
-    //   if (el.dataset.id === id) {
-    //     el.classList.remove("active");
-    //   }
-    // });
-    document.querySelector(`[data-id=${id}]`).classList.remove("active");
   }
 };
 
@@ -88,8 +89,12 @@ function setLike(id, thumb) {
     thumb,
   });
   saveToLocalStorage("unsplashapp-likes", likedPictures);
-
   renderLikes();
+}
+function setUnLike(id) {
+  const foundIndex = likedPictures.findIndex((likeObj) => likeObj.id === id);
+  likedPictures.splice(foundIndex, 1);
+  document.querySelector(`[data-id="${id}"]`).classList.remove("active");
 }
 function renderLikes() {
   likeZone.innerHTML = likedPictures
